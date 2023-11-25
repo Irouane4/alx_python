@@ -1,4 +1,10 @@
-for i in range(9):
-    for j in range(i + 1, 10):
-        print("{:02d}, {:02d}, ".format(i, j), end="")
-print("{:02d}".format(9))
+count = 0
+for num in range(10, 100):
+    first_digit = num // 10
+    second_digit = num % 10
+    if first_digit != second_digit:
+        if count > 0:
+            print(", ", end="")
+        print("{:02d}".format(num), end="")
+        count += 1
+print()
