@@ -1,11 +1,11 @@
-def add(a, b):
+def add1(a, b):
     return a + b
-print(add(1, 2))
+print(add1(1, 2))
 
-def add(a, b):
+def add2(a, b):
     return a + b
-print(add(98, 0))
+print(add2(98, 0))
 
-def add(a, b):
+def add3(a, b):
     return a + b
-print(add(100, -2))
+print(add3(100, -2))
