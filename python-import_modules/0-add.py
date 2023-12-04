@@ -1,7 +1,5 @@
-import importlib
+from add_0 import add
 a = 1
 b = 2
-
-add_0 = importlib.import_module('add_0')
-if __name__ == "__main__":
-    print("{} + {} = {}".format(a, b, add_0.add(a, b)))
+result = add(a, b)
+print("{} + {} = {}".format(a, b, result))
