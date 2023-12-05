@@ -1,15 +1,15 @@
 def square_matrix_simple(matrix=[]):
     # Create a new matrix with the same size as the input matrix
-    new_matrix = [[0] * len(matrix[0]) for _ in range(len(matrix))]
+    new_matrix = [row[:] for row in matrix]
 
-    # Iterate through each element in the matrix and compute the square
+    # Iterate through the rows and columns of the matrix and square each element
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
             new_matrix[i][j] = matrix[i][j] ** 2
 
     return new_matrix
 
-# Example usage
+# Example usage:
 matrix = [
     [1, 2, 3],
     [4, 5, 6],
