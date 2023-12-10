@@ -13,9 +13,25 @@ def is_same_class(obj, a_class):
 
 # Test cases
 a = 1
-if is_same_class(a, int):
-    print("{} is an instance of the class {}".format(a, int.__name__))
-if is_same_class(a, float):
-    print("{} is an instance of the class {}".format(a, float.__name__))
-if is_same_class(a, object):
-    print("{} is an instance of the class {}".format(a, object.__name__))
+print(is_same_class(a, int))  # True
+
+a = True
+print(is_same_class(a, int))  # False
+
+a = 3.14
+print(is_same_class(a, int))  # False
+
+a = True
+print(is_same_class(a, object))  # False
+
+a = None
+print(is_same_class(a, object))  # False
+
+a = None
+print(is_same_class(a, list))  # False
+
+a = [1, 2, 3]
+print(is_same_class(a, list))  # True
+
+a = [1, 2, 3]
+print(is_same_class(a, object))  # False
