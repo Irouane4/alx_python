@@ -15,7 +15,6 @@ class Square:
             raise ValueError("size must be >= 0")
         else:
             self.__size = size
-# Test cases
 if __name__ == "__main__":
     my_square_1 = Square(3)
     print(type(my_square_1))
