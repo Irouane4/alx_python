@@ -10,4 +10,5 @@ def is_same_class(obj, a_class):
 
 # Example usage:
 a = 1
-print(is_same_class(a, int))
+result = is_same_class(a, int)
+print(result)
