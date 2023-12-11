@@ -17,33 +17,32 @@ def is_same_class(obj, a_class):
 if __name__ == "__main__":
     # Test case 1
     a = 1
-    print(is_same_class(a, int))
+    print(is_same_class(a, int))  # Correct output: True
 
     # Test case 2
     a = True
-    print(is_same_class(a, int))
+    print(is_same_class(a, int))  # Correct output: False
 
     # Test case 3
     a = 3.14
-    print(is_same_class(a, int))
+    print(is_same_class(a, int))  # Correct output: False
 
     # Test case 4
     a = True
-    print(is_same_class(a, object))
+    print(is_same_class(a, object))  # Correct output: False
 
     # Test case 5
     a = None
-    print(is_same_class(a, object))
+    print(is_same_class(a, object))  # Correct output: False
 
     # Test case 6
     a = None
-    print(is_same_class(a, list))
+    print(is_same_class(a, list))  # Correct output: False
 
     # Test case 7
     a = [1, 2, 3]
-    print(is_same_class(a, list))
+    print(is_same_class(a, list))  # Correct output: True
 
     # Test case 8
     a = [1, 2, 3]
-    print(is_same_class(a, object))
-
+    print(is_same_class(a, object))  # Correct output: False
