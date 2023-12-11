@@ -6,13 +6,29 @@ def is_same_class(obj, a_class):
     :param a_class: The class to check against.
     :return: True if obj is an instance of a_class; otherwise False.
     """
-    return type(obj) is a_class
+    return type(obj) == a_class
 
 # Test cases
 a = 1
-if is_same_class(a, int):
-    print("{} is an instance of the class {}".format(a, int.__name__))
-if is_same_class(a, float):
-    print("{} is an instance of the class {}".format(a, float.__name__))
-if is_same_class(a, object):
-    print("{} is an instance of the class {}".format(a, object.__name__))
+print(is_same_class(a, int))
+
+a = True
+print(is_same_class(a, int))
+
+a = 3.14
+print(is_same_class(a, int))
+
+a = True
+print(is_same_class(a, object))
+
+a = None
+print(is_same_class(a, object))
+
+a = None
+print(is_same_class(a, list))
+
+a = [1, 2, 3]
+print(is_same_class(a, list))
+
+a = [1, 2, 3]
+print(is_same_class(a, object))
