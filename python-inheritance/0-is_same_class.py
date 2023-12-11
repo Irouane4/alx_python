@@ -8,27 +8,12 @@ def is_same_class(obj, a_class):
     """
     return type(obj) is a_class
 
-# Test cases
-a = 1
-print(is_same_class(a, int))  # Expected output: True
-
-a = True
-print(is_same_class(a, int))  # Expected output: False
-
-a = 3.14
-print(is_same_class(a, int))  # Expected output: False
-
-a = True
-print(is_same_class(a, object))  # Expected output: False
-
-a = None
-print(is_same_class(a, object))  # Expected output: False
-
-a = None
-print(is_same_class(a, list))  # Expected output: False
-
-a = [1, 2, 3]
-print(is_same_class(a, list))  # Expected output: True
-
-a = [1, 2, 3]
-print(is_same_class(a, object))  # Expected output: False
+if __name__ == "__main__":
+    from main_0 import *
+    from main_1 import *
+    from main_2 import *
+    from main_3 import *
+    from main_4 import *
+    from main_5 import *
+    from main_6 import *
+    from main_7 import *
