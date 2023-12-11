@@ -7,4 +7,3 @@ def is_kind_of_class(obj, a_class):
 
 a = 1
 result = is_kind_of_class(a, int)
-print(result)
