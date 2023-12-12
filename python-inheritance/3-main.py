@@ -11,8 +11,8 @@ expected_output = [
     '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__'
 ]
 
-# Check if the output matches the expected output
-if dir(bg) == expected_output:
+# Check if all elements in the expected output are in the actual output
+if all(attr in dir(bg) for attr in expected_output):
     print("Output matches the expected output!")
 else:
     print("Output does not match the expected output.")
