@@ -1,9 +1,7 @@
-#!/usr/bin/python3
 BaseGeometry = __import__('3-base_geometry').BaseGeometry
 
 bg = BaseGeometry()
 
-# Updated expected output to include '__init_subclass__'
 expected_output = [
     '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
     '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__',
@@ -11,7 +9,6 @@ expected_output = [
     '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__'
 ]
 
-# Check if all elements in the expected output are in the actual output
 if all(attr in dir(bg) for attr in expected_output):
     print("Output matches the expected output!")
 else:
