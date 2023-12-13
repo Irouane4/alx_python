@@ -9,6 +9,9 @@ class BaseGeometry:
     Base class definition for geometry.
     """
 
+    def __init_subclass__(cls):
+        pass
+
     def area(self):
         """
         Calculate the area.
@@ -17,3 +20,4 @@ class BaseGeometry:
         - Exception with the message "area() is not implemented".
         """
         raise Exception("area() is not implemented")
+
