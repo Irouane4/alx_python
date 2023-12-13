@@ -8,6 +8,10 @@ class BaseGeometry:
     """
     Base class definition for geometry.
     """
+
+    def __init_subclass__(cls):
+        pass
+
     def area(self):
         """
         Calculate the area.
