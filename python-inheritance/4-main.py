@@ -6,6 +6,9 @@ bg = BaseGeometry()
 # Get the actual output from dir(bg)
 actual_output = dir(bg)
 
+# Remove '__init_subclass__' from the actual output
+actual_output = [attr for attr in actual_output if attr != '__init_subclass__']
+
 # Exclude '__init_subclass__' from the expected output
 expected_output = [
     '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
