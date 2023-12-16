@@ -1,3 +1,4 @@
+"""Module defining the Rectangle class that inherits from Base."""
 from base import Base
 
 class Rectangle(Base):
