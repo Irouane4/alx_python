@@ -1,3 +1,4 @@
+""" 2-main """
 from rectangle import Rectangle
 
 if __name__ == "__main__":
