@@ -1,3 +1,4 @@
+# models/rectangle.py
 """Module defining the Rectangle class that inherits from Base."""
 
 from base import Base
