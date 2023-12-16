@@ -1,44 +1,13 @@
 # models/rectangle.py
 """Module defining the Rectangle class that inherits from Base."""
 
-from base import Base
+from models.base import Base
 
 class Rectangle(Base):
-    """Rectangle class that inherits from Base.
-
-    Attributes:
-        width (int): The width of the rectangle.
-        height (int): The height of the rectangle.
-        x (int): The x-coordinate of the rectangle.
-        y (int): The y-coordinate of the rectangle.
-        id (int): The id of the rectangle.
-
-    Note:
-        Inherited Attributes:
-        id (int): The id of the object (inherited from Base).
-
-        Getter/Setter Methods:
-        width (int): The width of the rectangle.
-        height (int): The height of the rectangle.
-        x (int): The x-coordinate of the rectangle.
-        y (int): The y-coordinate of the rectangle.
-    """
+    """Rectangle class that inherits from Base."""
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Initialize a Rectangle object.
-
-        Args:
-            width (int): The width of the rectangle.
-            height (int): The height of the rectangle.
-            x (int, optional): The x-coordinate of the rectangle (default is 0).
-            y (int, optional): The y-coordinate of the rectangle (default is 0).
-            id (int, optional): The id to assign to the rectangle. If not provided,
-                a unique id will be automatically generated.
-
-        Note:
-            Calls the super class (Base) constructor with the provided id.
-            Assigns width, height, x, and y to their corresponding attributes.
-        """
+        """Initialize a Rectangle object."""
         super().__init__(id)
         self.width = width
         self.height = height
@@ -52,15 +21,7 @@ class Rectangle(Base):
 
     @width.setter
     def width(self, value):
-        """Setter for the width attribute.
-
-        Args:
-            value (int): The width value to be set.
-
-        Raises:
-            TypeError: If value is not an integer.
-            ValueError: If value is less than or equal to 0.
-        """
+        """Setter for the width attribute."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
@@ -74,15 +35,7 @@ class Rectangle(Base):
 
     @height.setter
     def height(self, value):
-        """Setter for the height attribute.
-
-        Args:
-            value (int): The height value to be set.
-
-        Raises:
-            TypeError: If value is not an integer.
-            ValueError: If value is less than or equal to 0.
-        """
+        """Setter for the height attribute."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value <= 0:
@@ -96,15 +49,7 @@ class Rectangle(Base):
 
     @x.setter
     def x(self, value):
-        """Setter for the x attribute.
-
-        Args:
-            value (int): The x value to be set.
-
-        Raises:
-            TypeError: If value is not an integer.
-            ValueError: If value is less than 0.
-        """
+        """Setter for the x attribute."""
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
         if value < 0:
@@ -118,15 +63,7 @@ class Rectangle(Base):
 
     @y.setter
     def y(self, value):
-        """Setter for the y attribute.
-
-        Args:
-            value (int): The y value to be set.
-
-        Raises:
-            TypeError: If value is not an integer.
-            ValueError: If value is less than 0.
-        """
+        """Setter for the y attribute."""
         if not isinstance(value, int):
             raise TypeError("y must be an integer")
         if value < 0:
