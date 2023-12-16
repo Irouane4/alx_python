@@ -51,7 +51,15 @@ class Rectangle(Base):
 
     @width.setter
     def width(self, value):
-        """Setter for the width attribute."""
+        """Setter for the width attribute.
+
+        Args:
+            value (int): The width value to be set.
+
+        Raises:
+            TypeError: If value is not an integer.
+            ValueError: If value is less than or equal to 0.
+        """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
@@ -65,7 +73,15 @@ class Rectangle(Base):
 
     @height.setter
     def height(self, value):
-        """Setter for the height attribute."""
+        """Setter for the height attribute.
+
+        Args:
+            value (int): The height value to be set.
+
+        Raises:
+            TypeError: If value is not an integer.
+            ValueError: If value is less than or equal to 0.
+        """
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value <= 0:
@@ -79,7 +95,15 @@ class Rectangle(Base):
 
     @x.setter
     def x(self, value):
-        """Setter for the x attribute."""
+        """Setter for the x attribute.
+
+        Args:
+            value (int): The x value to be set.
+
+        Raises:
+            TypeError: If value is not an integer.
+            ValueError: If value is less than 0.
+        """
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
         if value < 0:
@@ -93,10 +117,17 @@ class Rectangle(Base):
 
     @y.setter
     def y(self, value):
-        """Setter for the y attribute."""
+        """Setter for the y attribute.
+
+        Args:
+            value (int): The y value to be set.
+
+        Raises:
+            TypeError: If value is not an integer.
+            ValueError: If value is less than 0.
+        """
         if not isinstance(value, int):
             raise TypeError("y must be an integer")
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
-
