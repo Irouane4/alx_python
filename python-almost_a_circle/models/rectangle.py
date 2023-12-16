@@ -1,8 +1,27 @@
 """Module defining the Rectangle class that inherits from Base."""
-from base import Base
+
+from models.base import Base
 
 class Rectangle(Base):
-    """Rectangle class that inherits from Base."""
+    """Rectangle class that inherits from Base.
+
+    Attributes:
+        width (int): The width of the rectangle.
+        height (int): The height of the rectangle.
+        x (int): The x-coordinate of the rectangle.
+        y (int): The y-coordinate of the rectangle.
+        id (int): The id of the rectangle.
+
+    Note:
+        Inherited Attributes:
+        id (int): The id of the object (inherited from Base).
+
+        Getter/Setter Methods:
+        width (int): The width of the rectangle.
+        height (int): The height of the rectangle.
+        x (int): The x-coordinate of the rectangle.
+        y (int): The y-coordinate of the rectangle.
+    """
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """Initialize a Rectangle object.
@@ -64,4 +83,3 @@ class Rectangle(Base):
     def y(self, value):
         """Setter for the y attribute."""
         self.__y = value
-
