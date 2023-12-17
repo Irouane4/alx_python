@@ -1,6 +1,3 @@
-import sys
-sys.path.append(r'C:\Users\HP\Documents\ISWE PROJECTS\alx_python\python-almost_a_circle\models')
-
 """
 Module containing the Rectangle class.
 """
