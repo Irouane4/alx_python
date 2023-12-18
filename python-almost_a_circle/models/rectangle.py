@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """
 Module containing the Rectangle class.
 """
@@ -88,4 +87,3 @@ class Rectangle(Base):
     def y(self, value):
         """Setter method for y attribute."""
         self.__y = value
-
