@@ -29,6 +29,9 @@ class Rectangle(Base):
         area(self): Public method that returns the area value of the Rectangle instance.
         display(self): Public method that prints in stdout the Rectangle instance with the character #.
         __str__(self): Override of the __str__ method to return a formatted string.
+        validate_integer(self, value, attr_name): Private method to validate if a value is an integer.
+        validate_positive(self, value, attr_name): Private method to validate if a value is positive.
+        validate_non_negative(self, value, attr_name): Private method to validate if a value is non-negative.
 
     """
 
@@ -115,3 +118,18 @@ class Rectangle(Base):
     def __str__(self):
         """Override of the __str__ method to return a formatted string."""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+
+    def validate_integer(self, value, attr_name):
+        """Private method to validate if a value is an integer."""
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(attr_name))
+
+    def validate_positive(self, value, attr_name):
+        """Private method to validate if a value is positive."""
+        if value <= 0:
+            raise ValueError("{} must be > 0".format(attr_name))
+
+    def validate_non_negative(self, value, attr_name):
+        """Private method to validate if a value is non-negative."""
+        if value < 0:
+            raise ValueError("{} must be >= 0".format(attr_name))
