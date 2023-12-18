@@ -32,6 +32,7 @@ class Rectangle(Base):
         validate_integer(self, value, attr_name): Private method to validate if a value is an integer.
         validate_positive(self, value, attr_name): Private method to validate if a value is positive.
         validate_non_negative(self, value, attr_name): Private method to validate if a value is non-negative.
+        update(self, *args): Public method to update attributes based on provided arguments.
 
     """
 
@@ -49,37 +50,12 @@ class Rectangle(Base):
         Note:
             This constructor calls the constructor of the Base class with id.
             It assigns each argument width, height, x, and y to the respective attribute.
-
-        Raises:
-            TypeError: If width, height, x, or y is not an integer.
-            ValueError: If width or height is not greater than 0, or if x or y is less than 0.
         """
         super().__init__(id)
-
-        if not isinstance(width, int):
-            raise TypeError("width must be an integer")
-        if width <= 0:
-            raise ValueError("width must be > 0")
-
-        if not isinstance(height, int):
-            raise TypeError("height must be an integer")
-        if height <= 0:
-            raise ValueError("height must be > 0")
-
-        if not isinstance(x, int):
-            raise TypeError("x must be an integer")
-        if x < 0:
-            raise ValueError("x must be >= 0")
-
-        if not isinstance(y, int):
-            raise TypeError("y must be an integer")
-        if y < 0:
-            raise ValueError("y must be >= 0")
-
-        self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
     @property
     def width(self):
@@ -144,17 +120,22 @@ class Rectangle(Base):
         """Override of the __str__ method to return a formatted string."""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
 
-    def validate_integer(self, value, attr_name):
-        """Private method to validate if a value is an integer."""
-        if not isinstance(value, int):
-            raise TypeError("{} must be an integer".format(attr_name))
+    def update(self, *args):
+        """
+        Public method to update attributes based on provided arguments.
 
-    def validate_positive(self, value, attr_name):
-        """Private method to validate if a value is positive."""
-        if value <= 0:
-            raise ValueError("{} must be > 0".format(attr_name))
+        Args:
+            *args: Variable number of arguments to update attributes.
 
-    def validate_non_negative(self, value, attr_name):
-        """Private method to validate if a value is non-negative."""
-        if value < 0:
-            raise ValueError("{} must be >= 0".format(attr_name))
+        Note:
+            Argument order is important.
+            1st argument: id attribute
+            2nd argument: width attribute
+            3rd argument: height attribute
+            4th argument: x attribute
+            5th argument: y attribute
+        """
+        if args:
+            attributes = ["id", "width", "height", "x", "y"]
+            for attr, value in zip(attributes, args):
+                setattr(self, attr, value)
