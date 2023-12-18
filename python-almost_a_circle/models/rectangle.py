@@ -6,6 +6,7 @@ try:
 except ImportError:
     pass
 
+
 class Rectangle(Base):
     """
     Rectangle class, inherits from Base.
@@ -26,6 +27,7 @@ class Rectangle(Base):
         x(self, value): Setter method for __x attribute.
         y(self): Getter method for __y attribute.
         y(self, value): Setter method for __y attribute.
+        area(self): Public method that returns the area value of the Rectangle instance.
     """
 
     def __init__(self, width, height, x=0, y=0, id=None):
@@ -57,10 +59,7 @@ class Rectangle(Base):
     @width.setter
     def width(self, value):
         """Setter method for width attribute."""
-        if not isinstance(value, int):
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
+        self.validate_integer("width", value, positive=True)
         self.__width = value
 
     @property
@@ -71,10 +70,7 @@ class Rectangle(Base):
     @height.setter
     def height(self, value):
         """Setter method for height attribute."""
-        if not isinstance(value, int):
-            raise TypeError("height must be an integer")
-        if value <= 0:
-            raise ValueError("height must be > 0")
+        self.validate_integer("height", value, positive=True)
         self.__height = value
 
     @property
@@ -85,10 +81,7 @@ class Rectangle(Base):
     @x.setter
     def x(self, value):
         """Setter method for x attribute."""
-        if not isinstance(value, int):
-            raise TypeError("x must be an integer")
-        if value < 0:
-            raise ValueError("x must be >= 0")
+        self.validate_integer("x", value, non_negative=True)
         self.__x = value
 
     @property
@@ -99,9 +92,35 @@ class Rectangle(Base):
     @y.setter
     def y(self, value):
         """Setter method for y attribute."""
-        if not isinstance(value, int):
-            raise TypeError("y must be an integer")
-        if value < 0:
-            raise ValueError("y must be >= 0")
+        self.validate_integer("y", value, non_negative=True)
         self.__y = value
 
+    def area(self):
+        """
+        Public method that returns the area value of the Rectangle instance.
+
+        Returns:
+            int: Area of the Rectangle.
+        """
+        return self.__width * self.__height
+
+    def validate_integer(self, name, value, positive=False, non_negative=False):
+        """
+        Validate if a value is an integer and satisfies additional conditions.
+
+        Args:
+            name (str): Name of the attribute.
+            value: Value to be validated.
+            positive (bool): Whether the value must be positive.
+            non_negative (bool): Whether the value must be non-negative.
+
+        Raises:
+            TypeError: If the value is not an integer.
+            ValueError: If additional conditions are not satisfied.
+        """
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(name))
+        if positive and value <= 0:
+            raise ValueError("{} must be > 0".format(name))
+        if non_negative and value < 0:
+            raise ValueError("{} must be >= 0".format(name))
