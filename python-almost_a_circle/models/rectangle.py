@@ -1,6 +1,9 @@
 """
 Module containing the Rectangle class.
 """
+if __name__ == "__main__":
+    import sys
+    sys.path.append('C:\Users\HP\Documents\ISWE PROJECTS\alx_python\python-almost_a_circle\models')
 
 from base import Base
 
