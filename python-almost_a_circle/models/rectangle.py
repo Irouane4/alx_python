@@ -28,6 +28,7 @@ class Rectangle(Base):
         y(self): Getter method for __y attribute.
         y(self, value): Setter method for __y attribute.
         area(self): Public method that returns the area value of the Rectangle instance.
+        display(self): Public method that prints the Rectangle instance with the character #.
     """
 
     def __init__(self, width, height, x=0, y=0, id=None):
@@ -103,6 +104,13 @@ class Rectangle(Base):
             int: Area of the Rectangle.
         """
         return self.__width * self.__height
+
+    def display(self):
+        """
+        Public method that prints the Rectangle instance with the character #.
+        """
+        for _ in range(self.__height):
+            print("#" * self.__width)
 
     def validate_integer(self, name, value, positive=False, non_negative=False):
         """
