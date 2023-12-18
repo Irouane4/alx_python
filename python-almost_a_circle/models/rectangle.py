@@ -2,11 +2,12 @@
 Module documentation here.
 """
 
-if __name__ == "__main__":
-    import sys
-    sys.path.append('C:\Users\HP\Documents\ISWE PROJECTS\alx_python\python-almost_a_circle\models')
+import sys
+sys.path.append('C:/Users/HP/Documents/ISWE PROJECTS/alx_python/python-almost_a_circle/models')
 
-from base import Base
+
+if __name__ == "__main__":
+    from base import Base
 
 class Rectangle(Base):
     """
