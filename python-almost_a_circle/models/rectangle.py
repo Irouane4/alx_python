@@ -3,7 +3,7 @@ Module documentation here.
 """
 
 try:
-    from base import Base
+    from models.base import Base
 except ImportError:
     pass  # Ignore import errors during documentation check
 
