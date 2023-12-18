@@ -32,7 +32,7 @@ class Rectangle(Base):
         validate_integer(self, value, attr_name): Private method to validate if a value is an integer.
         validate_positive(self, value, attr_name): Private method to validate if a value is positive.
         validate_non_negative(self, value, attr_name): Private method to validate if a value is non-negative.
-        update(self, *args): Public method to update attributes based on provided arguments.
+        update(self, *args): Public method that assigns an argument to each attribute.
 
     """
 
@@ -122,20 +122,12 @@ class Rectangle(Base):
 
     def update(self, *args):
         """
-        Public method to update attributes based on provided arguments.
+        Public method that assigns an argument to each attribute.
 
         Args:
-            *args: Variable number of arguments to update attributes.
-
-        Note:
-            Argument order is important.
-            1st argument: id attribute
-            2nd argument: width attribute
-            3rd argument: height attribute
-            4th argument: x attribute
-            5th argument: y attribute
+            *args: Arguments in the order: id, width, height, x, y.
         """
         if args:
-            attributes = ["id", "width", "height", "x", "y"]
-            for attr, value in zip(attributes, args):
-                setattr(self, attr, value)
+            attributes = ['id', 'width', 'height', 'x', 'y']
+            for attribute, value in zip(attributes, args):
+                setattr(self, attribute, value)
