@@ -6,7 +6,6 @@ try:
 except ImportError:
     pass
 
-
 class Rectangle(Base):
     """
     Rectangle class, inherits from Base.
@@ -28,7 +27,9 @@ class Rectangle(Base):
         y(self): Getter method for __y attribute.
         y(self, value): Setter method for __y attribute.
         area(self): Public method that returns the area value of the Rectangle instance.
-        display(self): Public method that prints the Rectangle instance with the character #.
+        display(self): Public method that prints in stdout the Rectangle instance with the character #.
+        __str__(self): Override of the __str__ method to return a formatted string.
+
     """
 
     def __init__(self, width, height, x=0, y=0, id=None):
@@ -60,7 +61,8 @@ class Rectangle(Base):
     @width.setter
     def width(self, value):
         """Setter method for width attribute."""
-        self.validate_integer("width", value, positive=True)
+        self.validate_integer(value, "width")
+        self.validate_positive(value, "width")
         self.__width = value
 
     @property
@@ -71,7 +73,8 @@ class Rectangle(Base):
     @height.setter
     def height(self, value):
         """Setter method for height attribute."""
-        self.validate_integer("height", value, positive=True)
+        self.validate_integer(value, "height")
+        self.validate_positive(value, "height")
         self.__height = value
 
     @property
@@ -82,7 +85,8 @@ class Rectangle(Base):
     @x.setter
     def x(self, value):
         """Setter method for x attribute."""
-        self.validate_integer("x", value, non_negative=True)
+        self.validate_integer(value, "x")
+        self.validate_non_negative(value, "x")
         self.__x = value
 
     @property
@@ -93,42 +97,21 @@ class Rectangle(Base):
     @y.setter
     def y(self, value):
         """Setter method for y attribute."""
-        self.validate_integer("y", value, non_negative=True)
+        self.validate_integer(value, "y")
+        self.validate_non_negative(value, "y")
         self.__y = value
 
     def area(self):
-        """
-        Public method that returns the area value of the Rectangle instance.
-
-        Returns:
-            int: Area of the Rectangle.
-        """
-        return self.__width * self.__height
+        """Public method that returns the area value of the Rectangle instance."""
+        return self.width * self.height
 
     def display(self):
-        """
-        Public method that prints the Rectangle instance with the character #.
-        """
-        for _ in range(self.__height):
-            print("#" * self.__width)
+        """Public method that prints in stdout the Rectangle instance with the character #."""
+        for _ in range(self.y):
+            print()
+        for _ in range(self.height):
+            print(" " * self.x + "#" * self.width)
 
-    def validate_integer(self, name, value, positive=False, non_negative=False):
-        """
-        Validate if a value is an integer and satisfies additional conditions.
-
-        Args:
-            name (str): Name of the attribute.
-            value: Value to be validated.
-            positive (bool): Whether the value must be positive.
-            non_negative (bool): Whether the value must be non-negative.
-
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If additional conditions are not satisfied.
-        """
-        if not isinstance(value, int):
-            raise TypeError("{} must be an integer".format(name))
-        if positive and value <= 0:
-            raise ValueError("{} must be > 0".format(name))
-        if non_negative and value < 0:
-            raise ValueError("{} must be >= 0".format(name))
+    def __str__(self):
+        """Override of the __str__ method to return a formatted string."""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
