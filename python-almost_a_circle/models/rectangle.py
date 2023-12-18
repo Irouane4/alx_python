@@ -1,10 +1,6 @@
 """
 Module containing the Rectangle class.
 """
-try:
-    from models.base import Base
-except ImportError:
-    pass
 
 from base import Base
 

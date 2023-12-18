@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 """ 1-main """
 
-import sys
-sys.path.append('/path/to/your/project')  # Replace with the actual path
-
 from rectangle import Rectangle
 
 if __name__ == "__main__":
