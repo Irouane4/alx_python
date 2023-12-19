@@ -4,7 +4,7 @@ Module containing the Rectangle class.
 try:
     from models.base import Base
 except ImportError:
-    Base = None
+    pass
 
 class Rectangle(Base):
     """
