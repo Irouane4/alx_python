@@ -132,3 +132,13 @@ class Rectangle(Base):
         elif kwargs:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def validate_positive(self, value, attr_name):
+        """Private method to validate if a value is positive."""
+        if value <= 0:
+            raise ValueError("{} must be > 0".format(attr_name))
+
+    def validate_non_negative(self, value, attr_name):
+        """Private method to validate if a value is non-negative."""
+        if value < 0:
+            raise ValueError("{} must be >= 0".format(attr_name))
