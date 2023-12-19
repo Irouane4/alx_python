@@ -14,7 +14,14 @@ def post_email(url, email):
         email (str): The email address to include in the request parameters.
     """
     payload = {'email': email}
-    response = requests.post(url, data=payload)
+
+    # Ensure proper URL formatting
+    if not url.endswith('/'):
+        url += '/'
+
+    full_url = f"{url}post_email"
+
+    response = requests.post(full_url, data=payload)
 
     print(f"Your email is: {email}")
     print(response.text)
