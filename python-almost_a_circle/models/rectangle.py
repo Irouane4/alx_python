@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 """ Rectangle module """
-from models.base import Base
+try:
+    from models.base import Base
+except ImportError:
+    pass
 
 class Rectangle(Base):
     """ Rectangle class """
