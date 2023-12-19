@@ -3,6 +3,7 @@
 
 import requests
 import sys
+from urllib.parse import urlencode
 
 
 def post_email(url, email):
@@ -12,17 +13,17 @@ def post_email(url, email):
 
     Args:
         url (str): The URL to send the POST request to.
-        email (str): The email address to include in the request parameters.
+        email (str): The email address to include in the URL parameters.
     """
-    payload = {'email': email}
+    params = urlencode({'email': email})
 
     # Ensure proper URL formatting
     if not url.endswith('/'):
         url += '/'
 
-    full_url = f"{url}post_email"
+    full_url = f"{url}post_email?{params}"
 
-    response = requests.post(full_url, data=payload)
+    response = requests.post(full_url)
 
     print(f"Your email is: {email}")
     print(response.text)
