@@ -29,7 +29,7 @@ class Rectangle(Base):
         area(self): Public method that returns the area value of the Rectangle instance.
         display(self): Public method that prints in stdout the Rectangle instance with the character #.
         __str__(self): Override of the __str__ method to return a formatted string.
-        update(self, *args): Public method that assigns an argument to each attribute.
+        update(self, *args, **kwargs): Public method that assigns arguments or key-value pairs to attributes.
 
     """
 
@@ -117,14 +117,18 @@ class Rectangle(Base):
         """Override of the __str__ method to return a formatted string."""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """
-        Public method that assigns an argument to each attribute.
+        Public method that assigns arguments or key-value pairs to attributes.
 
         Args:
             *args: Arguments in the order: id, width, height, x, y.
+            **kwargs: Keyword arguments (id, width, height, x, y).
         """
         if args:
             attributes = ['id', 'width', 'height', 'x', 'y']
             for attribute, value in zip(attributes, args):
                 setattr(self, attribute, value)
+        elif kwargs:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
