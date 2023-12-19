@@ -29,9 +29,6 @@ class Rectangle(Base):
         area(self): Public method that returns the area value of the Rectangle instance.
         display(self): Public method that prints in stdout the Rectangle instance with the character #.
         __str__(self): Override of the __str__ method to return a formatted string.
-        validate_integer(self, value, attr_name): Private method to validate if a value is an integer.
-        validate_positive(self, value, attr_name): Private method to validate if a value is positive.
-        validate_non_negative(self, value, attr_name): Private method to validate if a value is non-negative.
         update(self, *args): Public method that assigns an argument to each attribute.
 
     """
