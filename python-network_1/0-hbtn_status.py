@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """This script fetches the status from https://alu-intranet.hbtn.io/status"""
 
 import requests
