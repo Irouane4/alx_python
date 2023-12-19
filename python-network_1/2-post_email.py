@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """This script sends a POST request with an email parameter to a specified URL"""
 
 import requests
@@ -34,4 +35,4 @@ if __name__ == "__main__":
 
     url = sys.argv[1]
     email = sys.argv[2]
-    post_email(url, email)
+    post_email(url.rstrip('/'), email)
