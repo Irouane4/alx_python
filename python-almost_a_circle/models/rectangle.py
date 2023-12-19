@@ -8,34 +8,78 @@ except ImportError:
 
 class Rectangle(Base):
     """
-    ... (rest of the class documentation remains the same)
+    Rectangle class, inherits from Base.
+
+    Attributes:
+        __width (int): Private instance attribute for the width of the rectangle.
+        __height (int): Private instance attribute for the height of the rectangle.
+        __x (int): Private instance attribute for the x-coordinate of the rectangle.
+        __y (int): Private instance attribute for the y-coordinate of the rectangle.
+
+    Methods:
+        __init__(self, width, height, x=0, y=0, id=None): Constructor method for Rectangle class.
+        width(self): Getter method for __width attribute.
+        width(self, value): Setter method for __width attribute.
+        height(self): Getter method for __height attribute.
+        height(self, value): Setter method for __height attribute.
+        x(self): Getter method for __x attribute.
+        x(self, value): Setter method for __x attribute.
+        y(self): Getter method for __y attribute.
+        y(self, value): Setter method for __y attribute.
+        area(self): Public method that returns the area value of the Rectangle instance.
+        display(self): Public method that prints in stdout the Rectangle instance with the character #.
+        __str__(self): Override of the __str__ method to return a formatted string.
+        validate_integer(self, value, attr_name): Private method to validate if a value is an integer.
+        validate_positive(self, value, attr_name): Private method to validate if a value is positive.
+        validate_non_negative(self, value, attr_name): Private method to validate if a value is non-negative.
+
     """
-
-    def update(self, *args):
-        """
-        Public method that assigns arguments to each attribute.
-
-        Args:
-            args: Variable number of arguments in the order (id, width, height, x, y).
-
-        Note:
-            This method updates the attributes with the values provided in the arguments.
-        """
-        if len(args) > 0:
-            self.id = args[0]
-        if len(args) > 1:
-            self.width = args[1]
-        if len(args) > 2:
-            self.height = args[2]
-        if len(args) > 3:
-            self.x = args[3]
-        if len(args) > 4:
-            self.y = args[4]
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """
-        ... (rest of the constructor method remains the same)
+        Constructor method for Rectangle class.
+
+        Args:
+            width (int): Width of the rectangle.
+            height (int): Height of the rectangle.
+            x (int): x-coordinate of the rectangle (default is 0).
+            y (int): y-coordinate of the rectangle (default is 0).
+            id (int): ID of the rectangle (default is None).
+
+        Note:
+            This constructor calls the constructor of the Base class with id.
+            It assigns each argument width, height, x, and y to the respective attribute.
+
+        Raises:
+            TypeError: If width, height, x, or y is not an integer.
+            ValueError: If width or height is not greater than 0, or if x or y is less than 0.
         """
+        super().__init__(id)
+
+        if not isinstance(width, int):
+            raise TypeError("width must be an integer")
+        if width <= 0:
+            raise ValueError("width must be > 0")
+
+        if not isinstance(height, int):
+            raise TypeError("height must be an integer")
+        if height <= 0:
+            raise ValueError("height must be > 0")
+
+        if not isinstance(x, int):
+            raise TypeError("x must be an integer")
+        if x < 0:
+            raise ValueError("x must be >= 0")
+
+        if not isinstance(y, int):
+            raise TypeError("y must be an integer")
+        if y < 0:
+            raise ValueError("y must be >= 0")
+
+        self.__width = width
+        self.__height = height
+        self.__x = x
+        self.__y = y
 
     @property
     def width(self):
