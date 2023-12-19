@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+""" Doc """
 from rectangle import Rectangle
 
 if __name__ == "__main__":
