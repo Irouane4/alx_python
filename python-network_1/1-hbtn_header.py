@@ -16,11 +16,9 @@ def fetch_x_request_id(url):
 
     print(x_request_id)
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: ./1-hbtn_header.py <URL>")
         sys.exit(1)
-
     url = sys.argv[1]
     fetch_x_request_id(url)
