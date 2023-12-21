@@ -1,30 +1,36 @@
 #!/usr/bin/python3
-"""This script sends a request to a URL and displays the body of the response.
-Prints an error message if the HTTP status code is greater than or equal to 400.
-"""
+"""This script sends a POST request with a letter as a parameter to a specified URL"""
 
 import requests
 import sys
 
-def fetch_url(url):
+def search_api(url, q):
     """
-    Sends a request to the specified URL and displays the body of the response.
-    Prints an error message if the HTTP status code is greater than or equal to 400.
+    Sends a POST request to the specified URL with the 'q' parameter and displays the body of the response.
 
     Args:
-        url (str): The URL to send the request to.
+        url (str): The URL to send the POST request to.
+        q (str): The letter to include in the request parameters.
     """
-    response = requests.get(url)
+    payload = {'q': q}
 
-    print(response.text)
+    response = requests.post(url, data=payload)
 
-    if response.status_code >= 400:
-        print(f"Error code: {response.status_code}")
+    try:
+        json_response = response.json()
+        if json_response:
+            print("[{}] {}".format(json_response['id'], json_response['name']))
+        else:
+            print("No result")
+    except ValueError:
+        print("Not a valid JSON")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: ./4-error_code.py <URL>")
+    if len(sys.argv) != 3:
+        print("Usage: ./5-json_api.py <URL> <letter>")
         sys.exit(1)
 
     url = sys.argv[1]
-    fetch_url(url)
+    letter = sys.argv[2]
+
+    search_api(url, letter)
