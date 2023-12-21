@@ -12,9 +12,13 @@ def post_email(url, email):
     # Display the email
     print("Your email is:", email)
 
-    # Display the server's response, assuming "Email:" is in the response
+    # Check if the response contains "Email:"
     if "Email:" in response.text:
-        print(response.text.split("Email:")[1].strip())
+        # Extract the part of the response after "Email:"
+        email_part = response.text.split("Email:")[1].strip()
+
+        # Display the extracted part
+        print("Email:", email_part)
     else:
         print("Server response did not contain expected format.")
 
