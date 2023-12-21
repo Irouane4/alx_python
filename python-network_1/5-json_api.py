@@ -4,22 +4,22 @@
 import requests
 import sys
 
-def search_api(url, q):
+def search_api(url, letter):
     """
     Sends a POST request to the specified URL with the 'q' parameter and displays the body of the response.
 
     Args:
         url (str): The URL to send the POST request to.
-        q (str): The letter to include in the request parameters.
+        letter (str): The letter to include in the request parameters.
     """
-    payload = {'q': q}
+    payload = {'q': letter}
 
     response = requests.post(url, data=payload)
 
     try:
         json_response = response.json()
         if json_response:
-            print("[{}] {}".format(json_response['id'], json_response['name']))
+            print("[{}] {}".format(json_response.get('id'), json_response.get('name')))
         else:
             print("No result")
     except ValueError:
@@ -33,4 +33,4 @@ if __name__ == "__main__":
     url = sys.argv[1]
     letter = sys.argv[2]
 
-    search_api(url, letter)
+    search_api(url.rstrip('/'), letter)
