@@ -1,36 +1,21 @@
 #!/usr/bin/python3
-"""This script sends a POST request with a letter as a parameter to a specified URL"""
+"""Script to send a POST request to http://0.0.0.0:5000/search_user"""
 
 import requests
 import sys
 
-def search_api(url, letter):
-    """
-    Sends a POST request to the specified URL with the 'q' parameter and displays the body of the response.
-
-    Args:
-        url (str): The URL to send the POST request to.
-        letter (str): The letter to include in the request parameters.
-    """
-    payload = {'q': letter}
-
-    response = requests.post(url, data=payload)
+if __name__ == "__main__":
+    url = 'http://0.0.0.0:5000/search_user'
+    q = sys.argv[1] if len(sys.argv) > 1 else ""
 
     try:
-        json_response = response.json()
-        if json_response:
-            print("[{}] {}".format(json_response.get('id'), json_response.get('name')))
+        response = requests.post(url, data={'q': q})
+        data = response.json()
+
+        if data:
+            print("[{}] {}".format(data.get('id'), data.get('name')))
         else:
             print("No result")
+
     except ValueError:
         print("Not a valid JSON")
-
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: ./5-json_api.py <URL> <letter>")
-        sys.exit(1)
-
-    url = sys.argv[1]
-    letter = sys.argv[2]
-
-    search_api(url.rstrip('/'), letter)
