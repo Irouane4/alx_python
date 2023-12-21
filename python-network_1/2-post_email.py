@@ -12,8 +12,11 @@ def post_email(url, email):
     # Display the email
     print("Your email is:", email)
 
-    # Display the server's response
-    print(response.text)
+    # Display the server's response, assuming "Email:" is in the response
+    if "Email:" in response.text:
+        print(response.text.split("Email:")[1].strip())
+    else:
+        print("Server response did not contain expected format.")
 
 
 if __name__ == "__main__":
