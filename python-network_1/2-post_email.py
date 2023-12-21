@@ -1,36 +1,12 @@
 #!/usr/bin/python3
-"""This script sends a POST request with an email parameter to a specified URL"""
+"""Script to send a POST request to a URL with an email parameter"""
 
 import requests
 import sys
 
-
-def post_email(url, email):
-    """
-    Sends a POST request with an email parameter to the specified URL
-    and displays the body of the response.
-
-    Args:
-        url (str): The URL to send the POST request to.
-        email (str): The email address to include in the URL parameters.
-    """
-    # Ensure proper URL formatting
-    if not url.endswith('/'):
-        url += '/'
-
-    full_url = f"{url}post_email?email={email}"
-
-    response = requests.post(full_url)
-
-    print(f"Your email is: {email}")
-    print(response.text)
-
-
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: ./2-post_email.py <URL> <email>")
-        sys.exit(1)
-
     url = sys.argv[1]
     email = sys.argv[2]
-    post_email(url.rstrip('/'), email)
+
+    response = requests.post(url, data={'email': email})
+    print("Your email is: {}".format(response.text))
