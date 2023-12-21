@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Script to display GitHub user id using Basic Authentication"""
 
 import requests
@@ -7,7 +8,7 @@ if __name__ == "__main__":
     username = sys.argv[1]
     password = sys.argv[2]
 
-    url = "https://api.github.com/Irouane4"
+    url = "https://api.github.com/user"
     response = requests.get(url, auth=(username, password))
 
     if response.status_code == 200:
