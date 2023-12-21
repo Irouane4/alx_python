@@ -9,7 +9,10 @@ def post_email(url, email):
     # Send a POST request to the specified URL with the payload
     response = requests.post(url, data=payload)
 
-    # Display the body of the response
+    # Display the email
+    print("Your email is:", email)
+
+    # Display the server's response
     print(response.text)
 
 
@@ -22,9 +25,6 @@ if __name__ == "__main__":
     # Extract the URL and email from command-line arguments
     url = sys.argv[1]
     email = sys.argv[2]
-
-    # Display the email
-    print("Your email is:", email)
 
     # Call the function to send the POST request and display the response
     post_email(url, email)
