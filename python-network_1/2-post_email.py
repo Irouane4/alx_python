@@ -9,10 +9,7 @@ def post_email(url, email):
     # Send a POST request to the specified URL with the payload
     response = requests.post(url, data=payload)
 
-    # Display the email
-    print("Your email is:", email)
-
-    # Check if the response contains "Email:"
+    # Display the server's response, assuming "Email:" is in the response
     if "Email:" in response.text:
         # Extract the part of the response after "Email:"
         email_part = response.text.split("Email:")[1].strip()
