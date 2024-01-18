@@ -1,23 +1,35 @@
+#!/usr/bin/env python3
+
+import sys
 import MySQLdb
 
-# Connection
-db = MySQLdb.connect(
-    host="localhost",
-    port=3306,
-    user="user",
-    password="password",
-    db="hbtn_0e_4_usa",
-    charset="utf8mb4"
-)
+def main():
+    if len(sys.argv) != 5:
+        print("Usage: {} <username> <password> <database> <state>".format(sys.argv[0]))
+        return
 
-# Function to fetch city names
-def fetch_city_names(state_name):
-    with db.cursor() as cursor:
-        query = "SELECT cities.name FROM cities JOIN states ON cities.state_id = states.id WHERE states.name = %s ORDER BY cities.id ASC"
-        cursor.execute(query, (state_name,))
-        result = cursor.fetchall()
-        for row in result:
-            print(row[0])
+    username, password, database, state = sys.argv[1:5]
 
-# Call the function
-fetch_city_names("Arizona")
+    db = MySQLdb.connect(host="localhost", user=username, passwd=password, db=database)
+    cursor = db.cursor()
+
+    query = """
+        SELECT c.name
+        FROM cities c
+        JOIN states s ON c.state_id = s.id
+        WHERE s.name = %s
+        ORDER BY c.id;
+    """
+    cursor.execute(query, (state,))
+    cities = cursor.fetchall()
+
+    db.close()
+
+    if cities:
+        print(", ".join(city[0] for city in cities))
+    else:
+        print("No cities found for '{}'".format(state))
+
+if __name__ == "__main__":
+    main()
+    
