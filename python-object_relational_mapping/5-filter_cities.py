@@ -1,35 +1,26 @@
-import sys
-import MySQLdb
-from MySQLdb import Error
+import pymysql
 
-def main():
-    try:
-        connection = MySQLdb.connect(
-            host="localhost",
-            user=sys.argv[1],
-            password=sys.argv[2],
-            database=sys.argv[3]
-        )
+# Connection
+conn = pymysql.connect(
+    host='localhost',
+    port=3306,
+    user='user',
+    password='password',
+    db='test_5',
+    charset='utf8mb4',
+    cursorclass=pymysql.cursors.DictCursor
+)
 
-        cursor = connection.cursor()
+# Function to fetch city names
+def fetch_city_names(state_name):
+    with conn.cursor() as cursor:
         query = "SELECT cities.id, cities.name FROM cities JOIN states ON cities.state_id = states.id WHERE states.name = %s ORDER BY cities.id ASC"
-        cursor.execute(query, (sys.argv[4],))
-        rows = cursor.fetchall()
+        cursor.execute(query, (state_name,))
+        result = cursor.fetchall()
+        return result
 
-        if rows:
-            for row in rows:
-                print("{}: {}".format(row[0], row[1]))
-        else:
-            print("No cities found for that state.")
-
-    except Error as e:
-        print(f"Error: {e}")
-
-    finally:
-        if connection.open:
-            cursor.close()
-            connection.close()
-
-if __name__ == "__main__":
-    main()
+# Call the function
+cities = fetch_city_names("Arizona")
+for city in cities:
+    print(city['name'])
     
