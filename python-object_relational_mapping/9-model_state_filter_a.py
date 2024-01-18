@@ -1,28 +1,39 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""
+Script that lists all State objects that contain the letter a
+from the database hbtn_0e_6_usa.
+"""
+
 import sys
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
-def filter_states(user, password, database):
-    # Create a MySQL engine
-    engine = create_engine(f'mysql+pymysql://{user}:{password}@localhost:3306/{database}')
+if __name__ == "__main__":
+    # Check if correct number of arguments is provided
+    if len(sys.argv) != 4:
+        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
+        sys.exit(1)
 
-    # Create a session
+    # Retrieve command line arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+
+    # Create engine and bind to the database
+    engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+        username, password, database), pool_pre_ping=True)
+
+    # Create session
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query all State objects with the letter a
-    states = session.query(State).filter(State.name.like('%a%')).order_by(State.id).all()
+    # Query to retrieve State objects containing the letter 'a'
+    states_with_a = session.query(State).filter(State.name.like('%a%')).order_by(State.id).all()
 
-    # Print the results
-    for state in states:
-        print(f"{state.id}: {state.name}")
+    # Display the results
+    for state in states_with_a:
+        print("{}: {}".format(state.id, state.name))
 
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: {} user password database".format(sys.argv[0]))
-        exit(1)
-    user, password, database = sys.argv[1:4]
-    filter_states(user, password, database)
-    
+    # Close the session
+    session.close()
