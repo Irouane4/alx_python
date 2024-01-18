@@ -1,23 +1,40 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""
+Script that takes in an argument and displays all values in the states table
+of hbtn_0e_0_usa where name matches the argument.
+"""
 
 import sys
 import MySQLdb
 
-def filter_states(username, password, database, state_name):
-    """Connects to a MySQL server and lists all states in the hbtn_0e_0_usa database with names matching the state_name argument."""
+if __name__ == "__main__":
+    # Check if correct number of arguments is provided
+    if len(sys.argv) != 5:
+        print("Usage: {} <username> <password> <database> <state_name>".format(sys.argv[0]))
+        sys.exit(1)
 
-    db = MySQLdb.connect(user=username, passwd=password, db=database, host="localhost", port=3306)
+    # Get command line arguments
+    username, password, database, state_name = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+
+    # Connect to MySQL server
+    db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
+
+    # Create a MySQL cursor
     cursor = db.cursor()
 
-    cursor.execute("SELECT id, name FROM states WHERE name = %s ORDER BY id ASC", (state_name,))
+    # Format the SQL query with user input
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id".format(state_name)
+
+    # Execute the SQL query
+    cursor.execute(query)
+
+    # Fetch all the rows
     rows = cursor.fetchall()
 
+    # Display the results
     for row in rows:
         print(row)
 
+    # Close cursor and database connection
     cursor.close()
     db.close()
-
-if __name__ == "__main__":
-    filter_states(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-    
