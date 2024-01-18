@@ -20,3 +20,4 @@ def filter_states(username, password, database, state_name):
 
 if __name__ == "__main__":
     filter_states(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    
