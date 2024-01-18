@@ -1,32 +1,45 @@
+"""
+Script that takes in the name of a state as an argument
+and lists all cities of that state, using the database hbtn_0e_4_usa.
+"""
+
 import sys
 import MySQLdb
 
-def main():
-    if len(sys.argv) != 5:
-        print("Usage: {} <username> <password> <database> <state>".format(sys.argv[0]))
-        return
-
-    username, password, database, state = sys.argv[1:5]
-
-    db = MySQLdb.connect(host="localhost", user=username, passwd=password, db=database)
-    cursor = db.cursor()
-
-    query = """
-        SELECT c.name
-        FROM cities c
-        JOIN states s ON c.state_id = s.id
-        WHERE s.name = %s
-        ORDER BY c.id;
-    """
-    cursor.execute(query, (state,))
-    cities = cursor.fetchall()
-
-    db.close()
-
-    if cities:
-        print(", ".join(city[0] for city in cities))
-    else:
-        print("No cities found for '{}'".format(state))
-
 if __name__ == "__main__":
-    main()
+    # Check if correct number of arguments is provided
+    if len(sys.argv) != 5:
+        print("Usage: {} <username> <password> <database> <state_name>".format(sys.argv[0]))
+        sys.exit(1)
+
+    # Retrieve command line arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+    state_name = sys.argv[4]
+
+    # Connect to MySQL server
+    db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
+
+    # Create a cursor object
+    cur = db.cursor()
+
+    # Execute SQL query to retrieve cities of the specified state
+    query = """
+        SELECT cities.name
+        FROM cities
+        JOIN states ON cities.state_id = states.id
+        WHERE states.name = %s
+        ORDER BY cities.id ASC
+    """
+    cur.execute(query, (state_name,))
+
+    # Fetch all rows and print the result
+    cities = cur.fetchall()
+    city_names = [city[0] for city in cities]
+    result = ", ".join(city_names)
+    print(result)
+
+    # Close cursor and database connection
+    cur.close()
+    db.close()
