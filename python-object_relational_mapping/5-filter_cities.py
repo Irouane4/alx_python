@@ -1,10 +1,10 @@
 import sys
-import mysql.connector
-from mysql.connector import Error
+import MySQLdb
+from MySQLdb import Error
 
 def main():
     try:
-        connection = mysql.connector.connect(
+        connection = MySQLdb.connect(
             host="localhost",
             user=sys.argv[1],
             password=sys.argv[2],
@@ -26,7 +26,7 @@ def main():
         print(f"Error: {e}")
 
     finally:
-        if connection.is_connected():
+        if connection.open:
             cursor.close()
             connection.close()
 
