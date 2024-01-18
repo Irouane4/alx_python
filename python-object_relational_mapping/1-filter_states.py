@@ -6,7 +6,7 @@ import MySQLdb
 def filter_states(username, password, database):
     """Connects to a MySQL server and lists all states in the hbtn_0e_0_usa database with names starting with N."""
 
-    db = MySQLdb.connect(user=irw4n, passwd="Alxsqlprojects2024.", db=DESKTOP-M2M8LQ0, host=127.0.0.1, port=3306)
+    db = MySQLdb.connect(user="irw4n", passwd="Alxsqlprojects2024.", db="DESKTOP-M2M8LQ0", host=127.0.0.1, port=3306)
     cursor = db.cursor()
 
     cursor.execute("SELECT id, name FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
@@ -20,4 +20,3 @@ def filter_states(username, password, database):
 
 if __name__ == "__main__":
     filter_states(sys.argv[1], sys.argv[2], sys.argv[3])
-    
