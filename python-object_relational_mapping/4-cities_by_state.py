@@ -1,32 +1,41 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""
+Script that lists all cities from the database hbtn_0e_4_usa.
+"""
 
 import sys
 import MySQLdb
 
-def list_cities(username, password, database):
-    """Connects to a MySQL server and lists all cities from the hbtn_0e_4_usa database, sorted by cities.id, with only one execute() call."""
-
-    try:
-        db = MySQLdb.connect(user=username, passwd=password, db=database, host="localhost", port=3306)
-        cursor = db.cursor()
-        query = "SELECT * FROM cities ORDER BY cities.id ASC"
-        cursor.execute(query)
-        result = cursor.fetchall()
-
-        for row in result:
-            print(row)
-
-    except MySQLdb.Error as e:
-        print(f"Error {e.args[0]}: {e.args[1]}")
-
-    finally:
-        if cursor:
-            cursor.close()
-        if db:
-            db.close()
-
 if __name__ == "__main__":
+    # Check if correct number of arguments is provided
     if len(sys.argv) != 4:
-        print("Usage: ./4-my_cities.py <username> <password> <database>")
-    else:
-        list_cities(sys.argv[1], sys.argv[2], sys.argv[3])
+        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
+        sys.exit(1)
+
+    # Get command line arguments
+    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
+
+    # Connect to MySQL server
+    db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
+
+    # Create a MySQL cursor
+    cursor = db.cursor()
+
+    # Execute the SQL query to get cities with state names
+    cursor.execute("""
+        SELECT cities.id, cities.name, states.name
+        FROM cities
+        JOIN states ON cities.state_id = states.id
+        ORDER BY cities.id
+    """)
+
+    # Fetch all the rows
+    rows = cursor.fetchall()
+
+    # Display the results
+    for row in rows:
+        print(row)
+
+    # Close cursor and database connection
+    cursor.close()
+    db.close()
