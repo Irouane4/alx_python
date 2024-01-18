@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys
 import MySQLdb
 
@@ -30,4 +28,3 @@ if __name__ == "__main__":
         print("Usage: ./3-my_safe_filter_states.py <username> <password> <database> <state_name>")
     else:
         filter_states(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-        
