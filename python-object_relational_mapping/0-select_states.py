@@ -21,7 +21,7 @@ if __name__ == "__main__":
     cursor = db.cursor()
 
     # Execute the SQL query
-    cursor.execute("SELECT * FROM states ORDER BY xid")
+    cursor.execute("SELECT * FROM states ORDER BY id")
 
     # Fetch all the rows
     rows = cursor.fetchall()
