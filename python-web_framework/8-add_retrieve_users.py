@@ -27,8 +27,8 @@ def index():
 def add_user():
     if request.method == 'POST':
         try:
-            name = request.form['name']
-            email = request.form['email']
+            name = request.form.get('name')
+            email = request.form.get('email')
             new_user = User(name=name, email=email)
             db.session.add(new_user)
             db.session.commit()
