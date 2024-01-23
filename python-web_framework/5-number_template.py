@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 This script starts a Flask web application.
 The web application listens on 0.0.0.0, port 5000, and has six routes:
@@ -8,8 +9,8 @@ The web application listens on 0.0.0.0, port 5000, and has six routes:
 - /python/<text>: Displays "Python " followed by the value of the text variable
   (replace underscore _ symbols with a space). The default value of text is "is cool".
 - /number/<n>: Displays "n is a number" only if n is an integer.
-- /number_template/<n>: Displays an HTML page only if n is an integer:
-  H1 tag: "Number: n" inside the tag BODY.
+- /number_template/<n>: Displays an HTML page with H1 tag: "Number: n" inside the tag BODY,
+  only if n is an integer.
 """
 
 from flask import Flask, render_template
