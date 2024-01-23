@@ -1,42 +1,62 @@
-# 10-hello_route.py
+"""
+This script starts a Flask web application.
+The web application listens on 0.0.0.0, port 5000, and has five routes:
+- /: Displays "Hello HBNB!"
+- /hbnb: Displays "HBNB"
+- /c/<text>: Displays "C " followed by the value of the text variable
+  (replace underscore _ symbols with a space)
+- /python/<text>: Displays "Python " followed by the value of the text variable
+  (replace underscore _ symbols with a space). The default value of text is "is cool".
+- /number/<n>: Displays "n is a number" only if n is an integer.
+"""
 
-from flask import Flask, url_for, request, jsonify
-import re
+from flask import Flask, escape
 
 app = Flask(__name__)
 
-def check_int(value):
-    try:
-        int(value)
-        return True
-    except ValueError:
-        return False
-
-def format_text(text):
-    return re.sub('_', ' ', text)
 
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
-    return "Hello HBNB!"
+    """
+    Displays "Hello HBNB!" when the root route is accessed.
+    """
+    return 'Hello HBNB!'
+
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    return "HBNB"
+def display_hbnb():
+    """
+    Displays "HBNB" when the /hbnb route is accessed.
+    """
+    return 'HBNB'
+
 
 @app.route('/c/<text>', strict_slashes=False)
-def c(text):
-    return "C " + format_text(text)
+def display_c(text):
+    """
+    Displays "C " followed by the value of the text variable
+    (replace underscore _ symbols with a space).
+    """
+    return 'C {}'.format(escape(text.replace('_', ' ')))
+
 
 @app.route('/python/<text>', strict_slashes=False)
-def python(text):
-    return "Python " + format_text(text)
+@app.route('/python', strict_slashes=False, defaults={'text': 'is cool'})
+def display_python(text):
+    """
+    Displays "Python " followed by the value of the text variable
+    (replace underscore _ symbols with a space).
+    The default value of text is "is cool".
+    """
+    return 'Python {}'.format(escape(text.replace('_', ' ')))
 
-@app.route('/number/<n>', strict_slashes=False)
-def number(n):
-    if check_int(n):
-        return str(n) + " is a number"
-    else:
-        return jsonify({"error": "n must be an integer"}), 400
+
+@app.route('/number/<int:n>', strict_slashes=False)
+def display_number(n):
+    """
+    Displays "n is a number" only if n is an integer.
+    """
+    return '{} is a number'.format(n)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
