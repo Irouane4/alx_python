@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 This script starts a Flask web application.
 The web application listens on 0.0.0.0, port 5000, and has six routes:
@@ -8,47 +9,65 @@ The web application listens on 0.0.0.0, port 5000, and has six routes:
 - /python/<text>: Displays "Python " followed by the value of the text variable
   (replace underscore _ symbols with a space). The default value of text is "is cool".
 - /number/<n>: Displays "n is a number" only if n is an integer.
-- /number_template/<n>: Displays an HTML page with H1 tag: "Number: n" inside the tag BODY,
-  only if n is an integer.
+- /number_template/<n>: Displays an HTML page only if n is an integer:
+  H1 tag: "Number: n" inside the tag BODY.
 """
-from flask import Flask, render_template, request, abort
+
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
-    """Display 'Hello HBNB!' when accessing the root route"""
-    return "Hello HBNB!"
+    """
+    Displays "Hello HBNB!" when the root route is accessed.
+    """
+    return 'Hello HBNB!'
+
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """Display 'HBNB' when accessing the '/hbnb' route"""
-    return "HBNB"
+def display_hbnb():
+    """
+    Displays "HBNB" when the /hbnb route is accessed.
+    """
+    return 'HBNB'
+
 
 @app.route('/c/<text>', strict_slashes=False)
-def c_route(text="is cool"):
-    """Display 'C ' followed by the value of the text variable (replace underscore _ symbols with a space)"""
-    return "C " + text.replace("_", " ")
+def display_c(text):
+    """
+    Displays "C " followed by the value of the text variable
+    (replace underscore _ symbols with a space).
+    """
+    return 'C {}'.format(text.replace('_', ' '))
+
 
 @app.route('/python/<text>', strict_slashes=False)
-def python_route(text="is cool"):
-    """Display 'Python ' followed by the value of the text variable (replace underscore _ symbols with a space)"""
-    return "Python " + text.replace("_", " ")
+@app.route('/python', strict_slashes=False, defaults={'text': 'is cool'})
+def display_python(text):
+    """
+    Displays "Python " followed by the value of the text variable
+    (replace underscore _ symbols with a space). The default value of text is "is cool".
+    """
+    return 'Python {}'.format(text.replace('_', ' '))
+
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def number_route(n):
-    """Display '<n> is a number' if n is an integer"""
-    return "{} is a number".format(n)
+def display_number(n):
+    """
+    Displays "n is a number" only if n is an integer.
+    """
+    return '{} is a number'.format(n)
+
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def number_template(n):
-    """Display a HTML page only if n is an integer"""
-    return render_template('5-number_template.html', n=n)
-
-@app.errorhandler(404)
-def not_found_error(error):
-    """Return a custom 404 error page"""
-    return render_template('404.html'), 404
+def display_number_template(n):
+    """
+    Displays an HTML page with H1 tag: "Number: n" inside the tag BODY,
+    only if n is an integer.
+    """
+    return render_template('5-number_template.html', number=n)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
