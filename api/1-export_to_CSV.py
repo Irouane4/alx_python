@@ -3,9 +3,9 @@
 Script to gather data from a REST API for a given employee ID and export to CSV.
 """
 
+import csv
 import requests
 import sys
-import csv
 
 def get_employee_data(employee_id):
     """
