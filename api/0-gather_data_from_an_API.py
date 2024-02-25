@@ -1,15 +1,7 @@
-#!/usr/bin/python3
-"""
-Script to gather data from a REST API for a given employee ID.
-"""
-
 import requests
 import sys
 
 def get_employee_data(employee_id):
-    """
-    Get employee data from the API based on the employee ID.
-    """
     employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     todo_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
 
@@ -22,9 +14,6 @@ def get_employee_data(employee_id):
     return employee_data, todo_data
 
 def display_todo_progress(employee_data, todo_data):
-    """
-    Display TODO list progress for the employee.
-    """
     employee_name = employee_data.get('name')
     total_tasks = len(todo_data)
     completed_tasks = sum(task['completed'] for task in todo_data)
@@ -42,3 +31,4 @@ if __name__ == "__main__":
     employee_id = int(sys.argv[1])
     employee_data, todo_data = get_employee_data(employee_id)
     display_todo_progress(employee_data, todo_data)
+    
