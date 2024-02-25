@@ -1,11 +1,9 @@
 import requests
-
 def get_employee_data(employee_id):
-    employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    employee_response = requests.get(employee_url)
-    employee_data = employee_response.json()
+    employee_url = f"https://jsonplaceholder.tyode.com/users/{employee_id}"
+    employee = requests.employee_url)
+    employee_data = employee_.json()
     return employee_data
-
 def get_employee_todos(employee_id):
     todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
     todos_response = requests.get(todos_url)
