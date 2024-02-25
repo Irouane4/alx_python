@@ -41,6 +41,17 @@ def export_to_csv(employee_data, todo_data):
 
     print(f"Data exported to {filename}")
 
+def check_number_of_tasks(id):
+    """
+    Check the number of tasks in the CSV file.
+    """
+    expected_number_of_tasks = len(requests.get(f"https://jsonplaceholder.typicode.com/users/{id}/todos").json())
+    with open(str(id) + ".csv", 'r') as f:
+        csv_reader = csv.reader(f)
+        actual_number_of_tasks = sum(1 for _ in csv_reader) - 1  # Subtract header row
+
+    return expected_number_of_tasks == actual_number_of_tasks
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python3 script_name.py <employee_id>")
@@ -49,3 +60,8 @@ if __name__ == "__main__":
     employee_id = int(sys.argv[1])
     employee_data, todo_data = get_employee_data(employee_id)
     export_to_csv(employee_data, todo_data)
+
+    if check_number_of_tasks(employee_id):
+        print("Number of tasks in CSV: OK")
+    else:
+        print("Number of tasks in CSV: Mismatch")
