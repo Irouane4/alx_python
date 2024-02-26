@@ -34,3 +34,44 @@ if __name__ == "__main__":
         sys.exit(1)
 
     user_info(int(sys.argv[1]))
+
+def get_employee_data(employee_id):
+    # Get employee details
+    employee_url = f'https://jsonplaceholder.typicode.com/users/{employee_id}'
+    response = requests.get(employee_url)
+    employee_data = response.json()
+
+    # Get employee TODO list
+    todo_url = f'https://jsonplaceholder.typicode.com/users/{employee_id}/todos'
+    response = requests.get(todo_url)
+    todo_data = response.json()
+
+    return employee_data, todo_data
+
+def export_to_csv(employee_id, employee_name, todo_data):
+    filename = f'{employee_id}.csv'
+
+    with open(filename, 'w', newline='') as csvfile:
+        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for task in todo_data:
+            writer.writerow({
+                "USER_ID": employee_id,
+                "USERNAME": employee_name,
+                "TASK_COMPLETED_STATUS": str(task['completed']),
+                "TASK_TITLE": task['title']
+            })
+
+    print(f"{filename} created successfully.")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python3 script_name.py <employee_id>")
+        sys.exit(1)
+
+    employee_id = int(sys.argv[1])
+    employee_data, todo_data = get_employee_data(employee_id)
+
+    export_to_csv(employee_id, employee_data['name'], todo_data)
