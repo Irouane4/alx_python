@@ -8,6 +8,7 @@ todos_url = "https://jsonplaceholder.typicode.com/todos"
 
 def export_to_csv(id):
     """ Export user tasks to CSV """
+
     employee_url = f'https://jsonplaceholder.typicode.com/users/{id}'
     response = requests.get(employee_url)
     employee_data = response.json()
@@ -32,9 +33,10 @@ def export_to_csv(id):
             })
 
     print(f"{filename} created successfully.")
-
+    
 
 def user_info(id):
+    """ Check user information """
 
     export_to_csv(id)
 
@@ -50,7 +52,7 @@ def user_info(id):
             if not line == '\n':
                 num_lines += 1
 
-    if total_tasks == num_lines:
+    if total_tasks == num_lines - 1:
         print("Number of tasks in CSV: OK")
     else:
         print("Number of tasks in CSV: Incorrect")
