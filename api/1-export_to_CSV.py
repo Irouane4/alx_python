@@ -1,6 +1,6 @@
-import sys
-import requests
 import csv
+import requests
+import sys
 
 def get_employee_data(employee_id):
     employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
@@ -34,4 +34,3 @@ if __name__ == "__main__":
 
     employee_id = int(sys.argv[1])
     get_employee_data(employee_id)
-    
