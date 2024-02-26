@@ -2,35 +2,35 @@ import csv
 import requests
 import sys
 
-def get_employee_data(employee_id):
-    employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+users_url = "https://jsonplaceholder.typicode.com/users?id="
+todos_url = "https://jsonplaceholder.typicode.com/todos"
 
-    employee_response = requests.get(employee_url)
-    todos_response = requests.get(todos_url)
+def user_info(id):
+    """ Check user information """
+    total_tasks = 0
+    response = requests.get(todos_url).json()
+    for i in response:
+        if i['userId'] == id:
+            total_tasks += 1
 
-    if employee_response.status_code != 200 or todos_response.status_code != 200:
-        print("Error: Employee data not found.")
+    num_lines = 0
+    try:
+        with open(str(id) + ".csv", 'r') as f:
+            reader = csv.reader(f)
+            for line in reader:
+                num_lines += 1
+    except FileNotFoundError:
+        print("Number of tasks in CSV: Incorrect")
         return
 
-    employee_data = employee_response.json()
-    todos_data = todos_response.json()
-
-    employee_name = employee_data['username']
-
-    csv_filename = f"{employee_id}.csv"
-    with open(csv_filename, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-
-        for task in todos_data:
-            task_completed_status = "True" if task['completed'] else "False"
-            writer.writerow([employee_id, employee_name, task_completed_status, task['title']])
+    if total_tasks == num_lines - 1:  # Subtracting 1 to account for the header row
+        print("Number of tasks in CSV: OK")
+    else:
+        print("Number of tasks in CSV: Incorrect")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
+        print("Usage: python script.py <user_id>")
         sys.exit(1)
 
-    employee_id = int(sys.argv[1])
-    get_employee_data(employee_id)
+    user_info(int(sys.argv[1]))
