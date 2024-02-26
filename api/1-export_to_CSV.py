@@ -24,4 +24,3 @@ if __name__ == "__main__":
     employee_id = int(sys.argv[1])
     tasks = get_employee_tasks(employee_id)
     export_to_csv(employee_id, tasks)
-    
