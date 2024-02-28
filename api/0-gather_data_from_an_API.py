@@ -1,34 +1,23 @@
 import requests
 import sys
 
-def get_employee_data(employee_id):
-    employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    todo_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+id = sys.argv[1]
 
-    employee_response = requests.get(employee_url)
-    todo_response = requests.get(todo_url)
+request_user = requests.get('https://jsonplaceholder.typicode.com/users/'+id)
+request_todos = requests.get('https://jsonplaceholder.typicode.com/users/'+id+'/todos')
 
-    employee_data = employee_response.json()
-    todo_data = todo_response.json()
+data_user = request_user.json()
+data_todos = request_todos.json()
 
-    return employee_data, todo_data
+completed = 0
 
-def display_todo_progress(employee_data, todo_data):
-    employee_name = employee_data.get('name')
-    total_tasks = len(todo_data)
-    completed_tasks = sum(task['completed'] for task in todo_data)
-    completed_task_titles = [task['title'] for task in todo_data if task['completed']]
+for i in data_todos:
+    if i.get('completed')==True:
+        completed = completed + 1
 
-    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
-    for title in completed_task_titles:
-        print(f"\t{title}")
+print ('Employee {} is done with tasks({}/{}):'.format(data_user.get('name'), completed,len(data_todos)))
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 script_name.py <employee_id>")
-        sys.exit(1)
-
-    employee_id = int(sys.argv[1])
-    employee_data, todo_data = get_employee_data(employee_id)
-    display_todo_progress(employee_data, todo_data)
-    
+for item in data_todos:
+    if item.get('completed') == True:
+        print('\t ' + item.get('title'))   
+        
